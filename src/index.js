@@ -109,8 +109,8 @@ app.get("/forms", async (req, res) => {
   }
 });
 
-// app.listen(5000, () => {
-//   console.log("🚀 Server running on http://localhost:5000");
-// });
+app.listen(5000, () => {
+  console.log("🚀 Server running on http://localhost:5000");
+});
 
-export default app;
+// export default app;
