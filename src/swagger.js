@@ -8,7 +8,7 @@ export default {
   },
    servers: [
     {
-      url: "jotform-demo-d54qu5auu-talhanazims-projects.vercel.app", 
+      url: "https://jotform-demo-d54qu5auu-talhanazims-projects.vercel.app", 
       description: "Deployed server",
     },
     {
