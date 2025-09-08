@@ -3,12 +3,13 @@ import axios from "axios";
 import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
 import  swaggerDocument  from "./swagger.js";
+import swaggerSpec from "./swagger.js";
 
 dotenv.config();
 const app = express();
 app.use(express.json());
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const API_BASE = "https://api.jotform.com";
 const API_KEY = process.env.JOTFORM_API_KEY;
