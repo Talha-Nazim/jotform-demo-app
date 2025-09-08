@@ -118,5 +118,6 @@ dist
 .pnp.*
 
 sample.js
+index1.js
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Node

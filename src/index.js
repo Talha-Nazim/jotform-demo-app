@@ -1,14 +1,54 @@
 import express from "express";
 import axios from "axios";
 import dotenv from "dotenv";
+import swaggerUi from "swagger-ui-express";
+import  swaggerDocument  from "./swagger.js";
+
 dotenv.config();
 const app = express();
 app.use(express.json());
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 const API_BASE = "https://api.jotform.com";
 const API_KEY = process.env.JOTFORM_API_KEY;
 
-// POST body: { templateFormId: "252504582895466", replacements: { "{{NAME}}": "Full Name", "{{EMAIL}}": "Email Address" } }
+// ✅ Create a new form
+app.post("/create-form", async (req, res) => {
+  try {
+    const form = {
+      properties: {
+        title: "My API Created Form",
+      },
+      questions: {
+        1: {
+          type: "control_textbox",
+          text: "Your Name",
+          order: 1,
+          name: "namefield",
+        },
+        2: {
+          type: "control_email",
+          text: "Your Email",
+          order: 2,
+          name: "emailfield",
+        },
+      },
+    };
+
+    const response = await axios.post(
+      `${API_BASE}/user/forms?apiKey=${API_KEY}`,
+      form
+    );
+
+    res.json(response.data);
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    res.status(500).json({ error: "Failed to create form" });
+  }
+});
+
+// ✅ Get and update a new form
 app.post("/clone-and-fill", async (req, res) => {
   try {
     const { templateFormId, replacements } = req.body;
@@ -51,4 +91,23 @@ app.post("/clone-and-fill", async (req, res) => {
   }
 });
 
-app.listen(5000, () => console.log("Listening on 5000"));
+// ✅ Get all forms
+app.get("/forms", async (req, res) => {
+  try {
+    const response = await axios.get(
+      `${API_BASE}/user/forms?apiKey=${API_KEY}`,
+      {
+        // headers: { Authorization: `Bearer ${API_KEY}` },
+      }
+    );
+
+    res.json(response.data);
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    res.status(500).json({ error: "Failed to fetch forms" });
+  }
+});
+
+app.listen(5000, () => {
+  console.log("🚀 Server running on http://localhost:5000");
+});

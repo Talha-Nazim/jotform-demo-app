@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node index.js"
+    "dev": "node src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
     "axios": "^1.11.0",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
-    "jotform": "^1.0.1"
+    "jotform": "^1.0.1",
+    "swagger-ui-express": "^5.0.1"
   }
 }
