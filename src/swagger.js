@@ -7,10 +7,7 @@ export default {
     description: "Demo app showcasing two different approaches with JotForm API:\n1. Create a new form directly\n2. Clone and update an existing template form",
   },
    servers: [
-    {
-      url: "https://jotform-demo-d54qu5auu-talhanazims-projects.vercel.app", 
-      description: "Deployed server",
-    },
+
     {
       url: "http://localhost:5000",
       description: "Local development server",
